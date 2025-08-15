@@ -1,0 +1,1657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGlobe - Premium Online Learning Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Source+Sans+Pro:wght@300;400;600;700;900&family=Merriweather:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(30, 60, 114, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: white;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: #ffd700;
+            transition: width 0.3s ease;
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%);
+            color: white;
+            padding: 10rem 0 6rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            padding: 2rem;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 450px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Course Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .course-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .course-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+            z-index: 1;
+        }
+
+        .course-card:hover::before {
+            left: 100%;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .course-image {
+            height: 200px;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .course-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .course-card:hover .course-image::before {
+            transform: translateX(100%);
+        }
+
+        .course-content {
+            padding: 1.5rem;
+        }
+
+        .course-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .course-instructor {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .course-description {
+            color: #777;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stars {
+            color: #ffd700;
+        }
+
+        .course-price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #e74c3c;
+        }
+
+        .course-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .course-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Categories Section */
+        .categories {
+            background: #f8f9fa;
+        }
+
+        .category-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .testimonial-card {
+            background: rgba(255,255,255,0.15);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .testimonial-card:hover::before {
+            left: 100%;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .testimonial-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            border: 4px solid rgba(255,255,255,0.3);
+        }
+
+        .testimonial-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1rem;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1rem;
+            color: #e74c3c;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #e74c3c;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #34495e;
+            color: #bdc3c7;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border: 1px solid #c3e6cb;
+        }
+
+        /* New Sections */
+        .about-section {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .stats-section {
+            background: #2c3e50;
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+        }
+
+        .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #e74c3c;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .instructors-section {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .instructor-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .instructor-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .instructor-card:hover::before {
+            left: 100%;
+        }
+
+        .instructor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        }
+
+        .instructor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 2rem auto 1rem;
+            object-fit: cover;
+            border: 4px solid #e74c3c;
+        }
+
+        .course-details-section {
+            background: rgba(255,255,255,0.5);
+        }
+
+        .course-detail-card {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid #e74c3c;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-detail-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .course-detail-card:hover::before {
+            left: 100%;
+        }
+
+        .course-detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="#" class="logo">EduGlobe</a>
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#instructors">Instructors</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="btn btn-secondary" onclick="openLoginModal()">Login</button>
+                <button class="btn btn-primary" onclick="openSignupModal()">Sign Up</button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content" data-aos="fade-up">
+            <h1>Transform Your Future with EduGlobe</h1>
+            <p>Join millions of learners worldwide and advance your career with our premium expert-led courses. Learn at your own pace, anywhere, anytime.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('courses')">Explore Courses</button>
+                <button class="btn btn-secondary" onclick="openSignupModal()">Start Learning</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Courses Section -->
+    <section class="section" id="courses">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Premium Courses</h2>
+            <div class="courses-grid">
+                <div class="course-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Complete Web Development Bootcamp</h3>
+                        <p class="course-instructor">By Sarah Johnson</p>
+                        <p class="course-description">Learn HTML, CSS, JavaScript, React, and Node.js from scratch. Build real-world projects and become a full-stack developer.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8 (2.5k reviews)</span>
+                            </div>
+                            <span class="course-price">$89.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Complete Web Development Bootcamp', 89.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Data Science & Machine Learning</h3>
+                        <p class="course-instructor">By Dr. Michael Chen</p>
+                        <p class="course-description">Master Python, pandas, scikit-learn, and TensorFlow. Build ML models and analyze data like a pro.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9 (1.8k reviews)</span>
+                            </div>
+                            <span class="course-price">$129.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Data Science & Machine Learning', 129.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Digital Marketing Masterclass</h3>
+                        <p class="course-instructor">By Emma Rodriguez</p>
+                        <p class="course-description">Learn SEO, social media marketing, content strategy, and analytics. Grow your business online.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.7 (3.2k reviews)</span>
+                            </div>
+                            <span class="course-price">$79.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Digital Marketing Masterclass', 79.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">UI/UX Design Fundamentals</h3>
+                        <p class="course-instructor">By Alex Thompson</p>
+                        <p class="course-description">Master Figma, design principles, user research, and prototyping. Create beautiful, user-friendly interfaces.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8 (1.5k reviews)</span>
+                            </div>
+                            <span class="course-price">$99.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('UI/UX Design Fundamentals', 99.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Mobile App Development</h3>
+                        <p class="course-instructor">By David Kim</p>
+                        <p class="course-description">Build iOS and Android apps with React Native. Learn app design, development, and deployment.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.6 (2.1k reviews)</span>
+                            </div>
+                            <span class="course-price">$109.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Mobile App Development', 109.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Artificial Intelligence & Deep Learning</h3>
+                        <p class="course-instructor">By Dr. Emily Watson</p>
+                        <p class="course-description">Master AI algorithms, neural networks, and deep learning frameworks. Build intelligent systems and applications.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9 (1.2k reviews)</span>
+                            </div>
+                            <span class="course-price">$149.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Artificial Intelligence & Deep Learning', 149.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Cybersecurity Fundamentals</h3>
+                        <p class="course-instructor">By Mark Anderson</p>
+                        <p class="course-description">Learn ethical hacking, network security, and threat detection. Protect systems and data from cyber attacks.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8 (1.8k reviews)</span>
+                            </div>
+                            <span class="course-price">$119.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Cybersecurity Fundamentals', 119.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Cloud Computing & AWS</h3>
+                        <p class="course-instructor">By Rachel Green</p>
+                        <p class="course-description">Master AWS services, cloud architecture, and deployment strategies. Scale applications in the cloud.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.7 (2.3k reviews)</span>
+                            </div>
+                            <span class="course-price">$139.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Cloud Computing & AWS', 139.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Blockchain Development</h3>
+                        <p class="course-instructor">By James Wilson</p>
+                        <p class="course-description">Build decentralized applications, smart contracts, and understand blockchain technology fundamentals.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.8 (1.6k reviews)</span>
+                            </div>
+                            <span class="course-price">$159.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Blockchain Development', 159.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">DevOps & CI/CD</h3>
+                        <p class="course-instructor">By Lisa Chen</p>
+                        <p class="course-description">Learn Docker, Kubernetes, Jenkins, and Git. Automate deployment and streamline development workflows.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.6 (1.9k reviews)</span>
+                            </div>
+                            <span class="course-price">$129.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('DevOps & CI/CD', 129.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Game Development with Unity</h3>
+                        <p class="course-instructor">By Carlos Rodriguez</p>
+                        <p class="course-description">Create 2D and 3D games with Unity. Learn C# programming, game design, and publishing.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.7 (2.7k reviews)</span>
+                            </div>
+                            <span class="course-price">$99.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Game Development with Unity', 99.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Python for Data Analysis</h3>
+                        <p class="course-instructor">By Dr. Sarah Kim</p>
+                        <p class="course-description">Master pandas, numpy, matplotlib, and seaborn. Analyze data and create insightful visualizations.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.9 (3.1k reviews)</span>
+                            </div>
+                            <span class="course-price">$89.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Python for Data Analysis', 89.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="1300">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">Advanced JavaScript & ES6+</h3>
+                        <p class="course-instructor">By Mike Johnson</p>
+                        <p class="course-description">Master modern JavaScript, async programming, and advanced concepts. Build powerful web applications.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★☆</span>
+                                <span>4.8 (2.4k reviews)</span>
+                            </div>
+                            <span class="course-price">$79.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('Advanced JavaScript & ES6+', 79.99)">Enroll Now</button>
+                    </div>
+                </div>
+
+                <div class="course-card" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=200&fit=crop');"></div>
+                    <div class="course-content">
+                        <h3 class="course-title">React Native Masterclass</h3>
+                        <p class="course-instructor">By Amanda Lee</p>
+                        <p class="course-description">Build cross-platform mobile apps with React Native. Learn navigation, state management, and deployment.</p>
+                        <div class="course-meta">
+                            <div class="course-rating">
+                                <span class="stars">★★★★★</span>
+                                <span>4.7 (1.7k reviews)</span>
+                            </div>
+                            <span class="course-price">$119.99</span>
+                        </div>
+                        <button class="course-btn" onclick="enrollCourse('React Native Masterclass', 119.99)">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section categories" id="categories">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Course Categories</h2>
+            <div class="courses-grid">
+                <div class="category-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="category-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Programming</h3>
+                    <p>Learn coding languages and frameworks</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Business</h3>
+                    <p>Master business strategies and management</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="category-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>Design</h3>
+                    <p>Create stunning visuals and user experiences</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="category-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Languages</h3>
+                    <p>Learn new languages and communication skills</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="category-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3>Music</h3>
+                    <p>Master instruments and music production</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="category-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Cybersecurity</h3>
+                    <p>Learn ethical hacking and security</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="700">
+                    <div class="category-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud Computing</h3>
+                    <p>Master cloud platforms and services</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="800">
+                    <div class="category-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Blockchain</h3>
+                    <p>Learn decentralized technologies</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="900">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Game Development</h3>
+                    <p>Create interactive games and experiences</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1000">
+                    <div class="category-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Master AI and machine learning</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1100">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Development</h3>
+                    <p>Build iOS and Android applications</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1200">
+                    <div class="category-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Data Science</h3>
+                    <p>Analyze and visualize data</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1300">
+                    <div class="category-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>DevOps</h3>
+                    <p>Automate and streamline workflows</p>
+                </div>
+
+                <div class="category-card" data-aos="fade-up" data-aos-delay="1400">
+                    <div class="category-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Professional Skills</h3>
+                    <p>Develop career-enhancing skills</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+        <div class="container" style="color: black;">
+            <h2 class="section-title" data-aos="fade-up">About EduGlobe</h2>
+            <div class="courses-grid">
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-rocket"></i> Our Mission</h3>
+                    <p>To democratize education by providing world-class learning experiences that empower individuals to achieve their dreams and transform their careers through technology and innovation.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                    <p>To become the leading global platform for online education, connecting learners with expert instructors and cutting-edge content that drives personal and professional growth.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-heart"></i> Our Values</h3>
+                    <p>Excellence, Innovation, Accessibility, Community, and Continuous Learning. We believe in creating an inclusive environment where everyone can thrive.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="section stats-section" id="stats">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up" style="color: whitesmoke;">EduGlobe by the Numbers</h2>
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number">2M+</div>
+                    <div class="stat-label">Active Learners</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Expert Instructors</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number">1000+</div>
+                    <div class="stat-label">Premium Courses</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="500">
+                    <div class="stat-number">150+</div>
+                    <div class="stat-label">Countries Reached</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="600">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructors Section -->
+    <section class="section instructors-section" id="instructors">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Meet Our Expert Instructors</h2>
+            <div class="courses-grid">
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://plus.unsplash.com/premium_photo-1666298865085-bb3d56310bfc?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDh8fHxlbnwwfHx8fHw%3D" alt="Dr. Michael Chen" class="instructor-image">
+                    <h3>Dr. Michael Chen</h3>
+                    <p>Data Science & Machine Learning</p>
+                    <p>PhD in Computer Science, 15+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8d29tZW58ZW58MHx8MHx8fDA%3D" alt="Sarah Johnson" class="instructor-image">
+                    <h3>Sarah Johnson</h3>
+                    <p>Web Development & Full-Stack</p>
+                    <p>Senior Developer at Google, 10+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face" alt="Emma Rodriguez" class="instructor-image">
+                    <h3>Emma Rodriguez</h3>
+                    <p>Digital Marketing & Growth</p>
+                    <p>Marketing Director, 12+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face" alt="Alex Thompson" class="instructor-image">
+                    <h3>Alex Thompson</h3>
+                    <p>UI/UX Design & Product Design</p>
+                    <p>Design Lead at Apple, 8+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face" alt="David Kim" class="instructor-image">
+                    <h3>David Kim</h3>
+                    <p>Mobile App Development</p>
+                    <p>Mobile Architect, 9+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&crop=face" alt="Dr. Emily Watson" class="instructor-image">
+                    <h3>Dr. Emily Watson</h3>
+                    <p>Artificial Intelligence & Deep Learning</p>
+                    <p>AI Research Scientist, PhD in AI</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="700">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&h=300&fit=crop&crop=face" alt="Mark Anderson" class="instructor-image">
+                    <h3>Mark Anderson</h3>
+                    <p>Cybersecurity & Ethical Hacking</p>
+                    <p>Security Expert, 15+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="800">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=300&h=300&fit=crop&crop=face" alt="Rachel Green" class="instructor-image">
+                    <h3>Rachel Green</h3>
+                    <p>Cloud Computing & AWS</p>
+                    <p>Cloud Solutions Architect, 11+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="900">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&h=300&fit=crop&crop=face" alt="James Wilson" class="instructor-image">
+                    <h3>James Wilson</h3>
+                    <p>Blockchain Development</p>
+                    <p>Blockchain Architect, 7+ years experience</p>
+                </div>
+                <div class="instructor-card" data-aos="fade-up" data-aos-delay="1000">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=300&h=300&fit=crop&crop=face" alt="Lisa Chen" class="instructor-image">
+                    <h3>Lisa Chen</h3>
+                    <p>DevOps & CI/CD</p>
+                    <p>DevOps Engineer, 10+ years experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Details Section -->
+    <section class="section course-details-section" id="course-details">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Why Choose EduGlobe Courses?</h2>
+            <div class="courses-grid">
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-certificate"></i> Industry-Recognized Certificates</h3>
+                    <p>Earn certificates that are recognized by top companies worldwide. Our courses are designed to meet industry standards and help you stand out in the job market.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-users"></i> Expert-Led Instruction</h3>
+                    <p>Learn from industry professionals who work at top tech companies. Get real-world insights and practical knowledge that you can apply immediately.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-project-diagram"></i> Hands-On Projects</h3>
+                    <p>Build real-world projects that showcase your skills. Our project-based learning approach ensures you have a portfolio to impress employers.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="400">
+                    <h3><i class="fas fa-clock"></i> Lifetime Access</h3>
+                    <p>Get lifetime access to all course materials, including updates and new content. Learn at your own pace without any time restrictions.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="500">
+                    <h3><i class="fas fa-comments"></i> Community Support</h3>
+                    <p>Join our vibrant community of learners and instructors. Get help, share knowledge, and network with like-minded professionals.</p>
+                </div>
+                <div class="course-detail-card" data-aos="fade-up" data-aos-delay="600">
+                    <h3><i class="fas fa-mobile-alt"></i> Mobile Learning</h3>
+                    <p>Access your courses anywhere, anytime with our mobile app. Download lessons for offline learning and never miss a beat.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up" style="color: whitesmoke;">What Our Students Say</h2>
+            <div class="courses-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://plus.unsplash.com/premium_photo-1681493353999-a3eea8b95e1d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8d29tZW58ZW58MHx8MHx8fDA%3D" alt="Jennifer Smith" class="testimonial-image">
+                    <p>"EduGlobe transformed my career. The web development course helped me land my dream job as a full-stack developer."</p>
+                    <h4>Jennifer Smith</h4>
+                    <small>Software Developer at Google</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Robert Johnson" class="testimonial-image">
+                    <p>"The instructors are amazing and the content is up-to-date. I learned more in 3 months than in 2 years of college."</p>
+                    <h4>Robert Johnson</h4>
+                    <small>Data Scientist at Microsoft</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face" alt="Maria Garcia" class="testimonial-image">
+                    <p>"Flexible learning schedule and excellent support. The community is incredibly helpful and motivating."</p>
+                    <h4>Maria Garcia</h4>
+                    <small>UX Designer at Apple</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face" alt="James Wilson" class="testimonial-image">
+                    <p>"Best investment I've ever made. The digital marketing course helped me start my own successful business."</p>
+                    <h4>James Wilson</h4>
+                    <small>Entrepreneur & CEO</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="500">
+                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face" alt="Lisa Brown" class="testimonial-image">
+                    <p>"High-quality content and practical projects. I was able to build a portfolio that impressed employers."</p>
+                    <h4>Lisa Brown</h4>
+                    <small>Mobile Developer at Facebook</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="600">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face" alt="David Chen" class="testimonial-image">
+                    <p>"The AI course was mind-blowing! I now work on cutting-edge machine learning projects at a top tech company."</p>
+                    <h4>David Chen</h4>
+                    <small>AI Engineer at Tesla</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="700">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face" alt="Sarah Kim" class="testimonial-image">
+                    <p>"EduGlobe's cybersecurity course gave me the skills to protect companies from cyber threats. Highly recommended!"</p>
+                    <h4>Sarah Kim</h4>
+                    <small>Security Analyst at Amazon</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="800">
+                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop&crop=face" alt="Michael Rodriguez" class="testimonial-image">
+                    <p>"The cloud computing course opened doors I never thought possible. I'm now a senior cloud architect."</p>
+                    <h4>Michael Rodriguez</h4>
+                    <small>Cloud Architect at AWS</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="900">
+                    <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&h=150&fit=crop&crop=face" alt="Emily Watson" class="testimonial-image">
+                    <p>"From beginner to game developer! The Unity course was comprehensive and the projects were so much fun to build."</p>
+                    <h4>Emily Watson</h4>
+                    <small>Game Developer at Unity</small>
+                </div>
+
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="1000">
+                    <img src="https://plus.unsplash.com/premium_photo-1658506785658-a41c8a7ba8ed?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fHByb2Zlc3NvcnxlbnwwfHwwfHx8MA%3D%3D" alt="Alex Thompson" class="testimonial-image">
+                    <p>"The blockchain course was ahead of its time. I'm now working on revolutionary DeFi projects."</p>
+                    <h4>Alex Thompson</h4>
+                    <small>Blockchain Developer</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Login to Your Account</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            <div class="success-message" id="loginSuccess">Login successful! Redirecting...</div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('signupModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Create Your Account</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            <div class="success-message" id="signupSuccess">Account created successfully! Welcome to EduGlobe!</div>
+        </div>
+    </div>
+
+    <!-- Order Modal -->
+    <div id="orderModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('orderModal')">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; font-family: 'Playfair Display', serif;">Complete Your Purchase</h2>
+            <div id="orderDetails" style="margin-bottom: 2rem;">
+                <h3 id="courseTitle"></h3>
+                <p id="coursePrice" style="font-size: 1.5rem; font-weight: 700; color: #667eea;"></p>
+            </div>
+            <form id="orderForm">
+                <div class="form-group">
+                    <label for="cardName">Cardholder Name</label>
+                    <input type="text" id="cardName" required>
+                </div>
+                <div class="form-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label for="expiryDate">Expiry Date</label>
+                        <input type="text" id="expiryDate" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" placeholder="123" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Complete Purchase</button>
+            </form>
+            <div class="loading" id="orderLoading">
+                <div class="spinner"></div>
+                <p>Processing your payment...</p>
+            </div>
+            <div class="success-message" id="orderSuccess">Payment successful! You now have access to the course.</div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>EduGlobe</h3>
+                    <p>Empowering learners worldwide with premium online education. Transform your future with EduGlobe today.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#courses">Courses</a></li>
+                        <li><a href="#categories">Categories</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="help-center.html">Help Center</a></li>
+                        <li><a href="contact-support.html">Contact Support</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="community.html">Community</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                        <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 EduGlobe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Modal functions
+        function openLoginModal() {
+            document.getElementById('loginModal').style.display = 'block';
+        }
+
+        function openSignupModal() {
+            document.getElementById('signupModal').style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Smooth scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submissions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Simulate login process
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('loginSuccess').style.display = 'block';
+            
+            setTimeout(() => {
+                closeModal('loginModal');
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('loginSuccess').style.display = 'none';
+                document.getElementById('loginForm').reset();
+            }, 2000);
+        });
+
+        document.getElementById('signupForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('signupName').value;
+            const email = document.getElementById('signupEmail').value;
+            const password = document.getElementById('signupPassword').value;
+            const confirmPassword = document.getElementById('signupConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            // Simulate signup process
+            document.getElementById('signupForm').style.display = 'none';
+            document.getElementById('signupSuccess').style.display = 'block';
+            
+            setTimeout(() => {
+                closeModal('signupModal');
+                document.getElementById('signupForm').style.display = 'block';
+                document.getElementById('signupSuccess').style.display = 'none';
+                document.getElementById('signupForm').reset();
+            }, 2000);
+        });
+
+        // Course enrollment
+        function enrollCourse(courseTitle, price) {
+            document.getElementById('courseTitle').textContent = courseTitle;
+            document.getElementById('coursePrice').textContent = `$${price}`;
+            document.getElementById('orderModal').style.display = 'block';
+        }
+
+        // Order form submission
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            document.getElementById('orderForm').style.display = 'none';
+            document.getElementById('orderLoading').style.display = 'block';
+            
+            // Simulate payment processing
+            setTimeout(() => {
+                document.getElementById('orderLoading').style.display = 'none';
+                document.getElementById('orderSuccess').style.display = 'block';
+                
+                setTimeout(() => {
+                    closeModal('orderModal');
+                    document.getElementById('orderForm').style.display = 'block';
+                    document.getElementById('orderSuccess').style.display = 'none';
+                    document.getElementById('orderForm').reset();
+                }, 2000);
+            }, 3000);
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV formatting
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 60, 114, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #1e3c72 0%, #2a5298 50%, #4a90e2 100%)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Add hover effects to course cards
+        document.querySelectorAll('.course-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Add click effects to category cards
+        document.querySelectorAll('.category-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'translateY(-10px) scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px) scale(1)';
+                }, 150);
+            });
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        });
+    </script>
+</body>
+</html> 
